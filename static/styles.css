@@ -1,0 +1,53 @@
+.header{
+  background-color: #14233c;
+  padding: 10px;
+}
+.col-xs-6{
+  padding: 5px;
+}
+.header-tab{
+  height: 100%;
+  width: 100%;
+  margin: 5px 0px 5px 0px;
+  padding: 5px 10px 5px 10px;
+  background-color: #454F67;
+  color: white;
+  border-radius: 5px;
+}
+.header-tab h1{
+  font-size: 28px;
+}
+.header-tab h1 small{
+  color: white;
+  opacity: 0.8;
+}
+.header-tab h4{
+  font-size: 14px;
+  opacity: 0.5;
+  font-weight: normal;
+}
+.list-group{
+  margin: 0;
+}
+.list-group img{
+  height: 30px;
+  max-width: 30px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.list-group .text-danger{
+  margin-left: 45px;
+}
+.modal-header{
+  padding: 0;
+  border-radius: 5px;
+}
+.modal-header img{
+  width: 100%;
+  border-radius: 5px;
+}
+.modal-body img{
+  width: 50px;
+  margin-top: -50px;
+  border-radius: 3px;
+}
