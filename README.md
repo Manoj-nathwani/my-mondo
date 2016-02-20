@@ -11,4 +11,5 @@ Daily summary | Individual purchases
 Mondo don't allow customers to log into your app yet, so you're going to have to host the app yourself with your app credentials for it to work. I'm also re-authenticating on every request and not bothering with storing anything in a database to make things simple until they decide to open up the API to third parties logging into your apps.
 
 # Deploying
-Mondo don't allow customers to log into your app yet, so you're going to have to host the app yourself with your app credentials for it to work. I'm also re-authenticating on every request and not bothering with storing anything in a database to make things simple until they decide to open up the API to third parties logging into your apps.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manoj-nathwani/my-mondo
+)
