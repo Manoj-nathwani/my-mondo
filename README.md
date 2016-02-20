@@ -8,7 +8,8 @@ Daily summary | Individual purchases
 ![](http://i.imgur.com/8jUu3K2.jpg) | ![](http://i.imgur.com/E0F0ZfL.jpg)
 
 # Deploying Disclaimer
-Mondo don't allow customers to log into your app yet, so you're going to have to host the app yourself with your app credentials for it to work. I'm also re-authenticating on every request and not bothering with storing anything in a database to make things simple until they decide to open up the API to third parties logging into your apps.
+- Mondo don't currently allow other people to log into your app yet, so you're going to have to host the app yourself and pass in your username and password as raw strings. This sucks. I know. But it's the only way at the moment.
+- As the API is in Alpha, I'm not bothering with any cacheing or storing of any data. So the app is technically inefficient when it comes to requesting tokens.
 
 # Deploying
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manoj-nathwani/my-mondo)
