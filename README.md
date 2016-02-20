@@ -16,5 +16,5 @@ Mondo don't allow customers to log into your app yet, so you're going to have to
 - You'll also need (if you want) your [Pushbullet](https://www.pushbullet.com) `Access Token` to send yourself notifications whenever a payment is made. Remember to add the webook on the Mondo developer dashboard to activate this!
 
 # Help
-- Check out the official docs here: https://getmondo.co.uk/docs/#introduction
-- Also the slack channel here: https://devslack.getmondo.co.uk/
+- Check out the official docs here: https://getmondo.co.uk/docs
+- Also the slack channel here: https://devslack.getmondo.co.uk
