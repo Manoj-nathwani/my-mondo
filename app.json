@@ -1,0 +1,7 @@
+{
+  "name": "My Mondo",
+  "description": "Mondo iOS app clone for web",
+  "repository": "https://github.com/Manoj-nathwani/my-mondo",
+  "logo": "https://raw.githubusercontent.com/Manoj-nathwani/my-mondo/master/static/mondopurchase.png",
+  "keywords": ["Mondo", "Python", "Web App"]
+}
