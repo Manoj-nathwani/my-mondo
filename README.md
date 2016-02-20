@@ -11,5 +11,10 @@ Daily summary | Individual purchases
 Mondo don't allow customers to log into your app yet, so you're going to have to host the app yourself with your app credentials for it to work. I'm also re-authenticating on every request and not bothering with storing anything in a database to make things simple until they decide to open up the API to third parties logging into your apps.
 
 # Deploying
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manoj-nathwani/my-mondo
-)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manoj-nathwani/my-mondo)
+- Have your Mondo `client_id` and `client_secret` at hand from your Mondo Oauth app
+- You'll also need (if you want) your [Pushbullet](https://www.pushbullet.com) `Access Token` to send yourself notifications whenever a payment is made. Remember to add the webook on the Mondo developer dashboard to activate this!
+
+# Help
+- Check out the official docs here: https://getmondo.co.uk/docs/#introduction
+- Also the slack channel here: https://devslack.getmondo.co.uk/
