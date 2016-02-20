@@ -23,10 +23,8 @@ def new_transaction():
     if r['type'] == 'transaction.created':
         amount = '\u00a3{0:.2f}'.format(float(r['data']['amount'])*-1)
         description = r['data']['description']
-
         message_title = '{} spent'.format(amount, description)
         message_body = '@ {}'.format(amount, description)
-
         pb = Pushbullet(os.environ.get('pushbullet_key'))
         push = pb.push_note(message_title, message)
         return message
