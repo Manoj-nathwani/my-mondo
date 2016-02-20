@@ -18,7 +18,7 @@ def _access_token():
 def _balance(access_token):
     headers = {'Authorization': 'Bearer ' + access_token}
     payload = {
-        'account_id': 'acc_0000945WoZpfDydnhsW4HJ'
+        'account_id': os.environ['account_id']'
     }
     r = requests.get(
         "https://api.getmondo.co.uk/balance",
@@ -28,7 +28,7 @@ def _balance(access_token):
 def _transactions(access_token):
     headers = {'Authorization': 'Bearer ' + access_token}
     payload = {
-        'account_id': 'acc_0000945WoZpfDydnhsW4HJ',
+        'account_id': os.environ['account_id']',
         'expand[]': 'merchant'
     }
     r = requests.get(
