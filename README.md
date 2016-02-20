@@ -13,7 +13,7 @@ Daily summary | Individual purchases
 
 # Deploying
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manoj-nathwani/my-mondo)
-- Have your Mondo `client_id` and `client_secret` at hand from your Mondo Oauth app
+- Have your Mondo `client_id`, `client_secret` and `account_id` at hand from your Mondo Oauth app
 - You'll also need (if you want) your [Pushbullet](https://www.pushbullet.com) `Access Token` to send yourself notifications whenever a payment is made. Remember to add the webook on the Mondo developer dashboard to activate this!
 
 # Help
