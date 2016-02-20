@@ -16,6 +16,10 @@
       "description": "Your client_secret which Mondo should have given you for your app.",
       "value": "F32OIHGNJ43NGL43GLKRNKLGH3OIH34HOHGO34I+FHJWKGNKJWEG"
     },
+    "account_id": {
+      "description": "Your account_id for your personal Mondo account. See: https://getmondo.co.uk/docs/#accounts",
+      "generator": "acc_00009FKJJK7r732"
+    },
     "username": {
       "description": "The username for your personal Mondo account.",
       "value": "awesome@aol.com"
