@@ -3,5 +3,30 @@
   "description": "Mondo iOS app clone for web",
   "repository": "https://github.com/Manoj-nathwani/my-mondo",
   "logo": "https://raw.githubusercontent.com/Manoj-nathwani/my-mondo/master/static/mondopurchase.png",
-  "keywords": ["Mondo", "Python", "Web App"]
+  "keywords": [
+    "Mondo", 
+    "Python", 
+    "Web App"],
+  "env": {
+    "client_id": {
+      "description": "Your client_id which Mondo should have given you for your app.",
+      "generator": "oauthclient_00002389ORUIJ23ILJKN23KL"
+    },
+    "client_secret": {
+      "description": "Your client_secret which Mondo should have given you for your app.",
+      "value": "F32OIHGNJ43NGL43GLKRNKLGH3OIH34HOHGO34I+FHJWKGNKJWEG"
+    },
+    "username": {
+      "description": "The username for your personal Mondo account.",
+      "value": "awesome@aol.com"
+    },
+    "password": {
+      "description": "The password for your personal Mondo account (I know, this really sucks for now).",
+      "value": "password123"
+    },
+    "pushbullet_key": {
+      "description": "Used for push notifications",
+      "value": "o.R9834UIOGWJKNG43UGOHWJNW"
+    }
+  },
 }
