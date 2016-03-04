@@ -1,5 +1,10 @@
-.header{
+body, .header{
   background-color: #14233c;
+}
+.container{
+  max-width: 500px;
+}
+.header{
   padding: 10px;
 }
 .col-xs-6{
@@ -27,7 +32,7 @@
   font-weight: normal;
 }
 .list-group{
-  margin: 0;
+  margin: -1px 0 0 0;
 }
 .list-group img{
   height: 30px;
@@ -37,6 +42,13 @@
 }
 .list-group .text-danger{
   margin-left: 45px;
+}
+.list-group .list-group-item{
+  border-radius: 0 !important;
+}
+.list-group:first-of-type .list-group-item:first-child{
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 4px !important;
 }
 .modal-header{
   padding: 0;
