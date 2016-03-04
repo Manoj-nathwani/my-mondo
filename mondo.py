@@ -28,7 +28,7 @@ def _balance(access_token):
 def _transactions(access_token):
     headers = {'Authorization': 'Bearer ' + access_token}
     payload = {
-        'account_id': os.environ['account_id']',
+        'account_id': os.environ['account_id'],
         'expand[]': 'merchant'
     }
     r = requests.get(
