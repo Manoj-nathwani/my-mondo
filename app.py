@@ -5,17 +5,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    balance, transactions = mondo.get_data()
-    summary = mondo.summary(balance)
-    batched_transactions = mondo.batched_transactions(transactions)
-    daily_budget_left = mondo.daily_budget_left(balance['balance'])
-
+    m = mondo.Mondo()
     return render_template(
         'index.html',
-        balance = summary['balance'],
-        spend_today = summary['spend_today'],
-        daily_budget_left = daily_budget_left,
-        batched_transactions=batched_transactions)
+        balance = m.balance,
+        daily_budget = m.daily_budget(),
+        batched_transactions = m.batched_transactions())
 
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():
