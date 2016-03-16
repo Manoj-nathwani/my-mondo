@@ -9,8 +9,8 @@ def index():
     return render_template(
         'index.html',
         balance = m.balance,
-        daily_budget = m.daily_budget(),
-        batched_transactions = m.batched_transactions())
+        daily_budget = m.daily_budget,
+        batched_transactions = m.batched_transactions)
 
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():

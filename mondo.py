@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 
 # for debugging only, use one at a time
 save_to_cache = False
-load_from_cache = False
+load_from_cache = True
 
 class Mondo(object):
 
@@ -14,10 +14,11 @@ class Mondo(object):
             self.summary = json.load(open("cache/balance"))
             self.transactions = json.load(open("cache/transactions"))
         else:
-            access_token = self._access_token()
-            self.summary = self._balance(access_token)
-            self.transactions = self._transactions(access_token)
+            access_token = self._request_access_token()
+            self.summary = self._request_balance(access_token)
+            self.transactions = self._request_transactions(access_token)
 
+        self.days_left_this_month = 30 - datetime.today().day
         self.recurring_merchants = []
         for x in json.load(open("recurring_merchants.json")):
             self.recurring_merchants.append(x['merchant_id'])
@@ -25,7 +26,7 @@ class Mondo(object):
         self.balance = _clean_amount(self.summary['balance']*-1)
         self.spend_today = _clean_amount(self.summary['spend_today'])
 
-    def _access_token(self):
+    def _request_access_token(self):
         payload = {
             'grant_type': 'password',
             'client_id': os.environ['client_id'],
@@ -36,8 +37,7 @@ class Mondo(object):
         r = requests.post("https://production-api.gmon.io/oauth2/token", data=payload)
         r = json.loads(r.text)
         return r["access_token"]
-
-    def _balance(self, access_token):
+    def _request_balance(self, access_token):
 
         headers = {'Authorization': 'Bearer ' + access_token}
         payload = {
@@ -52,7 +52,7 @@ class Mondo(object):
             json.dump(r, open("cache/balance",'w'))
 
         return r
-    def _transactions(self, access_token):
+    def _request_transactions(self, access_token):
         headers = {'Authorization': 'Bearer ' + access_token}
         payload = {
             'account_id': os.environ['account_id'],
@@ -68,12 +68,61 @@ class Mondo(object):
 
         return r
 
+    def _deduct_future_transactions_from_recurring_merchants(self):
+        '''
+        This method:
+        - returns a total_to_deduct number which is the amount we predict all
+          self.recurring_merchants will charge until the end of this month
+        - removes all recurring_merchants transactions to hide them from them
+          the trancaction feed
+        '''
+
+        total_to_deduct = 0
+
+        for recurring_merchant in self.recurring_merchants:
+            first_transaction_date = datetime.now()
+            last_transaction_date = datetime.now()
+
+            total_spent_on_merchant = 0
+            for transaction in self.transactions:
+
+                if 'Active card check' in transaction['notes']:
+                    continue
+                if transaction['merchant'] is None:
+                    continue
+                if transaction['merchant']['id'] != recurring_merchant:
+                    continue
+
+                # add transaction to total_spent_on_merchant
+                amount = float(transaction['amount'])/100*-1
+                if amount > 0:
+                    total_spent_on_merchant += amount
+
+                # update first_transaction_date + last_transaction_date
+                created = transaction['created'].split("T")[0]
+                created = datetime.strptime(created, "%Y-%m-%d")
+                if created < first_transaction_date:
+                  first_transaction_date = created
+                if created > last_transaction_date:
+                  last_transaction_date = created
+
+            # add to total_to_deduct
+            if total_spent_on_merchant > 1:
+                days_between_first_and_last_transaction = (last_transaction_date-first_transaction_date).days
+                average_spent_daily = total_spent_on_merchant / days_between_first_and_last_transaction
+                total_to_deduct += average_spent_daily * self.days_left_this_month
+
+        return total_to_deduct
+
+    @property
     def daily_budget(self):
-        days_left_this_month = 30 - datetime.today().day
-        daily_budget_left = float(self.summary['balance'])/days_left_this_month
-        deduct = self.deduct_future_transactions_from_recurring_merchants(days_left_this_month)
+        money_left = float(self.summary['balance'])
+        daily_budget_left = money_left / self.days_left_this_month
+        deduct = self._deduct_future_transactions_from_recurring_merchants()
         daily_budget_left -= deduct
         return _clean_amount(daily_budget_left)
+
+    @property
     def batched_transactions(self):
 
         # hide recurring_merchants
@@ -111,34 +160,6 @@ class Mondo(object):
             })
 
         return batched_transactions
-
-    def deduct_future_transactions_from_recurring_merchants(self, days_left_this_month):
-        deduct = 0
-        for recurring_merchant in self.recurring_merchants:
-            first_transaction_date = datetime.now()
-            last_transaction_date = datetime.now()
-
-            transactions_by_merchant = []
-            for transaction in self.transactions:
-                if 'Active card check' not in transaction['notes'] and transaction['merchant'] is not None:
-                    if transaction['merchant']['id'] == recurring_merchant:
-                        amount = float(transaction['amount'])/100*-1
-                        if amount > 0:
-                            transactions_by_merchant.append(amount)
-                        transaction_created = datetime.strptime(transaction['created'].split("T")[0], "%Y-%m-%d")
-                        if transaction_created < first_transaction_date:
-                          first_transaction_date = transaction_created
-                        if transaction_created > last_transaction_date:
-                          last_transaction_date = transaction_created
-            if len(transactions_by_merchant) > 0:
-                days_between_first_and_last_transaction = (last_transaction_date-first_transaction_date).days
-                average_spent = sum(transactions_by_merchant) / len(transactions_by_merchant)
-                average_spent_daily = average_spent / days_between_first_and_last_transaction
-                print "You spend {} a day on {} {}".format(average_spent_daily, recurring_merchant, days_between_first_and_last_transaction)
-                deduct += average_spent_daily * days_left_this_month
-
-        return deduct
-
 
 
 def _clean_date(created):
