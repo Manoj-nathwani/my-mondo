@@ -1,4 +1,5 @@
-# My Mondo
+# My Mondo [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manoj-nathwani/my-mondo)
+
 Built during [MondoHack 3](https://attending.io/events/mondohack-3)
 
 [Mondo](https://getmondo.co.uk) are awesome however they only have an iOS app. My Mondo is a clone of their app as a heroku webapp which you can access on any device and can be pinned to your home screen to look + act exactly like their iOS app.
@@ -12,7 +13,6 @@ Daily summary | Individual purchases
 - As the API is in Alpha, I'm not bothering with any cacheing or storing of any data. So the app is technically inefficient when it comes to requesting tokens.
 
 # Deploying
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Manoj-nathwani/my-mondo)
 - Have your Mondo `client_id`, `client_secret` and `account_id` at hand from your Mondo OAuth app
 - You'll also need (if you want) your [Pushbullet](https://www.pushbullet.com) `Access Token` to send yourself notifications whenever a payment is made. Remember to add the webook on the Mondo developer dashboard to activate this!
 
