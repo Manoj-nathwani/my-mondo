@@ -18,7 +18,7 @@ class Mondo(object):
             self.summary = self._request_balance(access_token)
             self.transactions = self._request_transactions(access_token)
 
-        self.days_left_this_month = 30 - datetime.today().day
+        self.days_left_this_month = 29 - datetime.today().day
         self.recurring_merchants = []
         for x in json.load(open("recurring_merchants.json")):
             self.recurring_merchants.append(x['merchant_id'])
